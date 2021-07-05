@@ -1,54 +1,53 @@
 {
-  "author": "SendGrid <dx@sendgrid.com> (sendgrid.com)",
-  "contributors": [
-    "Kyle Partridge <kyle.partridge@sendgrid.com>",
-    "David Tomberlin <david.tomberlin@sendgrid.com>",
-    "Swift <swift@sendgrid.com>",
-    "Brandon West <brandon.west@sendgrid.com>",
-    "Scott Motte <scott.motte@sendgrid.com>",
-    "Robert Acosta <robert.acosta@sendgrid.com>",
-    "Elmer Thomas <elmer.thomas@sendgrid.com>",
-    "Adam Buczynski <me@adambuczynski.com>"
-  ],
   "name": "sendgrid",
-  "description": "Official SendGrid NodeJS library.",
-  "version": "4.7.1",
-  "homepage": "https://sendgrid.com",
+  "version": "6.0.0",
+  "private": false,
+  "license": "SEE LICENSE IN LICENSE.md",
   "repository": {
     "type": "git",
     "url": "git://github.com/sendgrid/sendgrid-nodejs.git"
   },
-  "engines": {
-    "node": ">= 0.4.7"
-  },
-  "dependencies": {
-    "async.ensureasync": "^0.5.2",
-    "async.queue": "^0.5.2",
-    "bottleneck": "^1.12.0",
-    "debug": "^2.2.0",
-    "lodash.chunk": "^4.2.0",
-    "sendgrid-rest": "^2.3.0"
-  },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^3.1.0",
-    "mocha": "^2.4.5",
-    "mocha-sinon": "^1.1.5",
-    "sinon": "^1.17.5",
-    "sinon-chai": "^2.8.0",
-    "typescript": "^2.0.0"
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "chai": "^4.0.1",
+    "chai-as-promised": "^7.1.1",
+    "dirty-chai": "^2.0.1",
+    "eslint": "^6.8.0",
+    "istanbul": "^1.0.0-alpha.2",
+    "lerna": "^3.19.0",
+    "mocha": "^6.2.2",
+    "mocha-clean": "^1.0.0",
+    "mocha-sinon": "^2.0.0",
+    "moment": "^2.19.3",
+    "sinon": "^2.3.2",
+    "sinon-chai": "^2.10.0",
+    "typescript": "^3.7.4"
   },
   "scripts": {
-    "lint": "eslint . --fix",
-    "test": "mocha",
-    "test:typescript": "tsc"
+    "lint": "if [ `node --version | cut -d'.' -f1 | cut -c 2` -ge \"8\" ]; then eslint . --fix; else echo \"eslint is not available for node < 8.0\"; fi",
+    "test:all": "babel-node ./node_modules/istanbul/lib/cli cover ./node_modules/mocha/bin/_mocha \"**/*.spec.js\"",
+    "test:helpers": "babel-node ./node_modules/istanbul/lib/cli cover ./node_modules/mocha/bin/_mocha \"packages/helpers/**/*.spec.js\"",
+    "test:client": "babel-node ./node_modules/istanbul/lib/cli cover ./node_modules/mocha/bin/_mocha \"packages/client/**/*.spec.js\"",
+    "test:mail": "babel-node ./node_modules/istanbul/lib/cli cover ./node_modules/mocha/bin/_mocha \"packages/mail/**/*.spec.js\"",
+    "test:eventwebhook": "babel-node ./node_modules/istanbul/lib/cli cover ./node_modules/mocha/bin/_mocha \"packages/eventwebhook/**/*.spec.js\"",
+    "test:inbound": "babel-node ./node_modules/istanbul/lib/cli cover ./node_modules/mocha/bin/_mocha \"packages/inbound-mail-parser/**/*.spec.js\"",
+    "test:contact": "babel-node ./node_modules/istanbul/lib/cli cover ./node_modules/mocha/bin/_mocha \"packages/contact-importer/**/*.spec.js\"",
+    "test:files": "babel-node ./node_modules/istanbul/lib/cli cover ./node_modules/mocha/bin/_mocha \"test/files.spec.js\"",
+    "test:license": "babel-node ./node_modules/istanbul/lib/cli cover ./node_modules/mocha/bin/_mocha license.spec.js",
+    "test:typescript": "tsc",
+    "test": "npm run test:all -s",
+    "coverage": "open -a \"Google Chrome\" ./coverage/lcov-report/index.html"
   },
-  "typings": "index.d.ts",
-  "tags": [
-    "http",
-    "rest",
-    "api"
-  ],
-  "license": "MIT",
-  "optionalDependencies": {}
+  "description": "![Twilio SendGrid Logo](https://github.com/sendgrid/sendgrid-python/raw/master/twilio_sendgrid_logo.png)",
+  "bugs": {
+    "url": "https://github.com/sendgrid/sendgrid-nodejs/issues"
+  },
+  "homepage": "https://github.com/sendgrid/sendgrid-nodejs#readme",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "author": "Twilio SendGrid"
 }
